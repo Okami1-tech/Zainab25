@@ -7,523 +7,549 @@
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  -webkit-tap-highlight-color:transparent;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
 }
 
 html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
+    width:100%;
+    min-height:100%;
 }
 
 body{
-  background:#050308;
-  color:#fff;
-  font-family:Arial,sans-serif;
+    background:#050308;
+    color:white;
+    font-family:Arial,sans-serif;
 }
 
 /* MAIN */
 
 .app{
-  position:relative;
-  width:100%;
-  height:100dvh;
-  overflow:hidden;
+    position:relative;
+    min-height:100vh;
+    min-height:100dvh;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      #26112e 0%,
-      #100812 43%,
-      #040306 100%
-    );
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            #28132f 0%,
+            #100812 45%,
+            #040306 100%
+        );
 }
 
-/* subtle glow */
+/* SOFT LIGHT */
 
 .glow{
-  position:absolute;
+    position:fixed;
 
-  width:280px;
-  height:280px;
+    width:280px;
+    height:280px;
 
-  border-radius:50%;
+    left:50%;
+    top:40%;
 
-  background:rgba(174,78,208,.10);
+    transform:translate(-50%,-50%);
 
-  filter:blur(70px);
+    border-radius:50%;
 
-  transition:transform 2s ease;
+    background:rgba(177,80,211,.10);
+
+    filter:blur(70px);
+
+    transition:transform 2s ease;
+
+    pointer-events:none;
 }
 
 /* START */
 
 .start{
-  position:relative;
-  z-index:5;
+    position:fixed;
 
-  width:min(88%,390px);
+    inset:0;
 
-  text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-  transition:
-    opacity .8s ease,
-    transform .8s ease;
+    text-align:center;
+
+    padding:25px;
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
 }
 
 .start.hide{
-  opacity:0;
-  transform:scale(.94);
-  pointer-events:none;
+    opacity:0;
+    transform:scale(.94);
+    pointer-events:none;
+}
+
+.start-inner{
+    width:100%;
+    max-width:390px;
 }
 
 .kicker{
-  color:#866b8d;
+    color:#8a6d91;
 
-  font-size:9px;
+    font-size:10px;
 
-  letter-spacing:4px;
+    letter-spacing:4px;
 
-  margin-bottom:20px;
+    margin-bottom:22px;
 }
 
 .start h1{
-  font-family:Georgia,serif;
+    font-family:Georgia,serif;
 
-  font-weight:normal;
+    font-weight:normal;
 
-  font-size:clamp(32px,9vw,46px);
+    font-size:
+        clamp(34px,9vw,48px);
 
-  line-height:1.15;
+    line-height:1.15;
 
-  margin-bottom:16px;
+    margin-bottom:18px;
 }
 
 .start p{
-  color:#a99daa;
+    color:#aa9eac;
 
-  font-family:Georgia,serif;
+    font-family:Georgia,serif;
 
-  font-size:14px;
+    font-size:15px;
 
-  line-height:1.8;
+    line-height:1.8;
 }
 
-.open{
-  margin-top:30px;
+.btn{
+    margin-top:30px;
 
-  border:1px solid rgba(220,170,235,.25);
+    padding:16px 29px;
 
-  background:rgba(148,61,182,.10);
+    border-radius:50px;
 
-  color:#ddb6e7;
+    border:1px solid
+        rgba(220,170,235,.28);
 
-  border-radius:50px;
+    background:
+        rgba(147,62,180,.12);
 
-  padding:15px 28px;
+    color:#dfb8e9;
 
-  font-size:10px;
+    font-size:10px;
 
-  letter-spacing:3px;
+    letter-spacing:3px;
 
-  cursor:pointer;
-}
-
-.open:active{
-  transform:scale(.95);
+    cursor:pointer;
 }
 
 /* ENVELOPE */
 
 .envelope-stage{
-  position:absolute;
+    position:fixed;
 
-  z-index:10;
+    left:50%;
+    top:50%;
 
-  width:220px;
-  height:155px;
+    width:220px;
+    height:150px;
 
-  left:50%;
-  top:50%;
+    transform:
+        translate(-50%,-50%)
+        scale(.8);
 
-  transform:
-    translate(-50%,-50%)
-    scale(.8);
+    opacity:0;
 
-  opacity:0;
+    pointer-events:none;
 
-  pointer-events:none;
-
-  transition:
-    opacity .8s ease,
-    transform .8s ease;
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
 }
 
 .envelope-stage.show{
-  opacity:1;
+    opacity:1;
 
-  transform:
-    translate(-50%,-50%)
-    scale(1);
+    transform:
+        translate(-50%,-50%)
+        scale(1);
 
-  pointer-events:auto;
+    pointer-events:auto;
 }
 
 .envelope{
-  position:absolute;
+    position:relative;
 
-  inset:0;
+    width:100%;
+    height:100%;
 
-  background:#2b1632;
+    background:#2b1632;
 
-  border:1px solid rgba(228,186,239,.20);
+    border:1px solid
+        rgba(225,180,237,.2);
 
-  border-radius:4px;
+    border-radius:5px;
 
-  box-shadow:
-    0 20px 70px rgba(0,0,0,.55),
-    0 0 40px rgba(184,91,214,.13);
+    box-shadow:
+        0 20px 70px
+        rgba(0,0,0,.55);
 
-  overflow:hidden;
+    cursor:pointer;
 
-  cursor:pointer;
+    overflow:hidden;
 }
 
-.envelope::before{
-  content:"";
+.envelope-top{
+    position:absolute;
 
-  position:absolute;
+    left:0;
+    top:0;
 
-  left:0;
-  top:0;
+    width:0;
+    height:0;
 
-  width:0;
-  height:0;
+    border-left:110px solid transparent;
+    border-right:110px solid transparent;
+    border-top:80px solid #412247;
 
-  border-left:110px solid transparent;
-  border-right:110px solid transparent;
-  border-top:82px solid #3a2042;
+    transform-origin:top;
 
-  transform-origin:top;
+    transition:
+        transform 1s ease;
 
-  transition:transform 1s ease;
-
-  z-index:3;
+    z-index:3;
 }
 
-.envelope.opened::before{
-  transform:rotateX(180deg);
-
-  z-index:1;
-}
-
-.envelope::after{
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  bottom:0;
-
-  width:0;
-  height:0;
-
-  border-left:110px solid #24132b;
-  border-right:110px solid #24132b;
-  border-top:75px solid transparent;
-
-  z-index:2;
+.envelope.open .envelope-top{
+    transform:rotateX(180deg);
 }
 
 .seal{
-  position:absolute;
+    position:absolute;
 
-  z-index:5;
+    z-index:5;
 
-  left:50%;
-  top:50%;
+    left:50%;
+    top:50%;
 
-  transform:translate(-50%,-50%);
+    transform:translate(-50%,-50%);
 
-  width:50px;
-  height:50px;
+    width:52px;
+    height:52px;
 
-  border-radius:50%;
+    border-radius:50%;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-  background:#9c52b5;
+    background:#9c51b6;
 
-  box-shadow:
-    0 0 25px rgba(195,111,220,.35);
+    box-shadow:
+        0 0 28px
+        rgba(196,105,223,.4);
 
-  font-size:21px;
+    font-size:22px;
 
-  transition:
-    opacity .5s ease,
-    transform .7s ease;
+    transition:.5s;
 }
 
-.envelope.opened .seal{
-  opacity:0;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.5);
+.envelope.open .seal{
+    opacity:0;
+    transform:
+        translate(-50%,-50%)
+        scale(.4);
 }
 
-.env-label{
-  position:absolute;
+.envelope-label{
+    position:absolute;
 
-  z-index:4;
+    z-index:4;
 
-  left:0;
-  right:0;
-  bottom:15px;
+    left:0;
+    right:0;
+    bottom:13px;
 
-  text-align:center;
+    text-align:center;
 
-  color:#d9b8df;
+    color:#d9b7df;
 
-  font-family:Georgia,serif;
+    font-family:Georgia,serif;
 
-  font-size:11px;
+    font-size:11px;
 
-  letter-spacing:2px;
+    letter-spacing:2px;
 }
 
-/* PAPER */
+/* LETTER SCREEN */
 
-.paper{
-  position:absolute;
+.letter-screen{
+    position:fixed;
 
-  z-index:20;
+    inset:0;
 
-  left:50%;
-  top:50%;
+    z-index:20;
 
-  width:min(90%,420px);
+    padding:
+        max(25px, env(safe-area-inset-top))
+        18px
+        max(25px, env(safe-area-inset-bottom));
 
-  max-height:80dvh;
+    background:
+        rgba(5,3,8,.97);
 
-  overflow:hidden;
+    overflow-y:auto;
+    overflow-x:hidden;
 
-  transform:
-    translate(-50%,-50%)
-    scale(.75);
+    opacity:0;
+    visibility:hidden;
 
-  opacity:0;
-
-  pointer-events:none;
-
-  transition:
-    opacity 1s ease,
-    transform 1s cubic-bezier(.2,.8,.2,1);
+    transition:opacity .8s ease;
 }
 
-.paper.show{
-  opacity:1;
-
-  transform:
-    translate(-50%,-50%)
-    scale(1);
-
-  pointer-events:auto;
+.letter-screen.show{
+    opacity:1;
+    visibility:visible;
 }
 
-.paper-card{
-  width:100%;
+/* LETTER */
 
-  padding:
-    clamp(25px,7vw,38px)
-    clamp(22px,7vw,38px);
+.letter{
+    width:100%;
 
-  border-radius:20px;
+    max-width:450px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(40,22,47,.96),
-      rgba(15,9,19,.98)
-    );
+    margin:
+        25px auto
+        35px;
 
-  border:
-    1px solid rgba(226,181,238,.13);
+    padding:
+        30px 23px
+        35px;
 
-  box-shadow:
-    0 25px 80px rgba(0,0,0,.55);
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #29162f,
+            #100912
+        );
+
+    border:
+        1px solid
+        rgba(224,180,237,.14);
+
+    box-shadow:
+        0 25px 80px
+        rgba(0,0,0,.5);
 }
 
-.paper-kicker{
-  color:#876c8d;
+.letter-kicker{
+    color:#8c708f;
 
-  font-size:8px;
+    font-size:9px;
 
-  letter-spacing:3px;
+    letter-spacing:3px;
 
-  margin-bottom:18px;
+    margin-bottom:20px;
 }
 
-.paper-card h2{
-  font-family:Georgia,serif;
+.letter h2{
+    font-family:Georgia,serif;
 
-  font-weight:normal;
+    font-weight:normal;
 
-  font-size:
-    clamp(27px,8vw,39px);
+    font-size:
+        clamp(29px,8vw,40px);
 
-  line-height:1.2;
+    line-height:1.2;
 
-  margin-bottom:22px;
+    margin-bottom:25px;
 }
 
-.paper-card p{
-  color:#b9aabb;
+.letter p{
+    color:#c0b1c2;
 
-  font-family:Georgia,serif;
+    font-family:Georgia,serif;
 
-  font-size:
-    clamp(13px,3.7vw,16px);
+    font-size:16px;
 
-  line-height:1.85;
+    line-height:1.9;
+
+    overflow-wrap:break-word;
 }
 
-.em{
-  display:block;
+.highlight{
+    display:block;
 
-  margin:
-    17px 0;
+    margin:
+        22px 0;
 
-  color:#dfa9ec;
+    color:#e0acec;
 
-  font-size:
-    clamp(16px,4.5vw,20px);
+    font-size:20px;
+
+    line-height:1.6;
 }
 
-/* typing final */
+.next{
+    display:block;
+
+    width:100%;
+
+    margin-top:30px;
+
+    padding:16px;
+
+    border-radius:50px;
+
+    border:1px solid
+        rgba(220,170,235,.25);
+
+    background:
+        rgba(147,62,180,.12);
+
+    color:#dfb8e9;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+}
+
+/* FINAL */
 
 .final{
-  display:none;
+    display:none;
 
-  text-align:center;
+    text-align:center;
+
+    padding:
+        20px 0 10px;
 }
 
 .final.show{
-  display:block;
+    display:block;
 
-  animation:
-    finalIn 1s ease forwards;
+    animation:
+        fadeUp 1s ease forwards;
 }
 
-@keyframes finalIn{
-  from{
-    opacity:0;
-    transform:translateY(12px);
-  }
+@keyframes fadeUp{
 
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
 }
 
-.final-text{
-  font-family:Georgia,serif;
+.final-message{
+    font-family:Georgia,serif;
 
-  font-size:
-    clamp(23px,7vw,34px);
+    font-size:
+        clamp(25px,7vw,36px);
 
-  line-height:1.45;
+    line-height:1.55;
 
-  color:#eee2f0;
+    color:#f0e4f2;
 }
 
-.cursor{
-  display:inline-block;
+.typing-cursor{
+    display:inline-block;
 
-  width:2px;
-  height:1em;
+    width:2px;
 
-  margin-left:4px;
+    height:1em;
 
-  vertical-align:-2px;
+    background:#dda8eb;
 
-  background:#dca5eb;
+    margin-left:3px;
 
-  animation:blink .7s infinite;
+    animation:
+        blink .7s infinite;
 }
 
 @keyframes blink{
-  50%{opacity:0}
+    50%{opacity:0;}
 }
 
-.love{
-  margin-top:20px;
+.final-love{
+    margin-top:25px;
 
-  color:#dda5eb;
+    color:#dfa7ec;
 
-  font-size:18px;
+    font-family:Georgia,serif;
 
-  font-family:Georgia,serif;
+    font-size:19px;
+
+    line-height:1.7;
 }
 
-.reset{
-  margin-top:25px;
+.replay{
+    margin-top:30px;
 
-  background:none;
+    border:none;
 
-  border:none;
+    background:none;
 
-  color:#67576a;
+    color:#756379;
 
-  font-size:9px;
+    font-size:9px;
 
-  letter-spacing:2px;
+    letter-spacing:2px;
 
-  cursor:pointer;
+    cursor:pointer;
 }
 
-/* small floating particles */
+/* PARTICLES */
 
 .particle{
-  position:absolute;
+    position:fixed;
 
-  width:3px;
-  height:3px;
+    width:4px;
+    height:4px;
 
-  border-radius:50%;
+    border-radius:50%;
 
-  background:#dca8ec;
+    background:#dda6ec;
 
-  opacity:0;
+    pointer-events:none;
 
-  animation:
-    rise 4s ease-out forwards;
+    animation:
+        rise 4s ease-out forwards;
 }
 
 @keyframes rise{
-  0%{
-    opacity:0;
-    transform:translateY(20px);
-  }
 
-  20%{
-    opacity:.6;
-  }
+    0%{
+        opacity:0;
+        transform:translateY(20px);
+    }
 
-  100%{
-    opacity:0;
-    transform:translateY(-180px);
-  }
+    20%{
+        opacity:.7;
+    }
+
+    100%{
+        opacity:0;
+        transform:translateY(-180px);
+    }
+
 }
 </style>
 </head>
@@ -532,213 +558,214 @@ body{
 
 <div class="app">
 
-  <div class="glow" id="glow"></div>
+<div class="glow" id="glow"></div>
 
-  <!-- START -->
 
-  <div class="start" id="start">
+<!-- START -->
 
-    <div class="kicker">
-      FOR MY SARAUNIYA 👑
+<section class="start" id="start">
+
+    <div class="start-inner">
+
+        <div class="kicker">
+            FOR MY SARAUNIYA 👑
+        </div>
+
+        <h1>
+            I hid something<br>
+            for you.
+        </h1>
+
+        <p>
+            Don't try to guess what it is. 🌚
+            <br>
+            Just open it.
+        </p>
+
+        <button
+            class="btn"
+            onclick="showEnvelope()"
+        >
+            OPEN IT 💜
+        </button>
+
     </div>
 
-    <h1>
-      I hid something<br>
-      for you.
-    </h1>
-
-    <p>
-      Don't try to guess what it is. 🌚
-      <br>
-      Just open it.
-    </p>
-
-    <button
-      class="open"
-      onclick="showEnvelope()"
-    >
-      OPEN IT 💜
-    </button>
-
-  </div>
+</section>
 
 
-  <!-- ENVELOPE -->
+<!-- ENVELOPE -->
 
-  <div
+<section
     class="envelope-stage"
     id="envelopeStage"
-  >
+>
 
     <div
-      class="envelope"
-      id="envelope"
-      onclick="openEnvelope()"
+        class="envelope"
+        id="envelope"
+        onclick="openEnvelope()"
     >
 
-      <div class="seal">
-        💜
-      </div>
+        <div class="envelope-top"></div>
 
-      <div class="env-label">
-        SARAUNIYA
-      </div>
+        <div class="seal">
+            💜
+        </div>
 
-    </div>
-
-  </div>
-
-
-  <!-- PAPER -->
-
-  <div
-    class="paper"
-    id="paper"
-  >
-
-    <div class="paper-card">
-
-      <div class="paper-kicker">
-        OKAY... I LIED 😂
-      </div>
-
-      <h2>
-        This is actually
-        a love letter.
-      </h2>
-
-      <p>
-
-        I wanted to make you something today
-        that you couldn't predict.
-
-        <br><br>
-
-        So I didn't make you another heart.
-
-        <br>
-
-        I didn't make you a bunch of stars.
-
-        <br>
-
-        I just wanted to tell you something.
-
-        <span class="em">
-          You have become one of the
-          most beautiful surprises in my life.
-        </span>
-
-        I didn't know your voice would
-        someday be capable of making me
-        smile like an idiot.
-
-        😂💜
-
-        <br><br>
-
-        I didn't know someone could tell me
-        “go and study” and somehow make me
-        actually want to study.
-
-        <br><br>
-
-        I didn't know I'd become this happy
-        just because you sang something for me
-        and thought it wasn't good.
-
-        <span class="em">
-          You keep giving me little moments
-          I want to keep.
-        </span>
-
-        And honestly, Sarauniya...
-
-        <br><br>
-
-        I don't want perfect moments.
-
-        <br>
-
-        I want the random calls.
-
-        <br>
-
-        The silly conversations.
-
-        <br>
-
-        Your voice.
-
-        <br>
-
-        Your laughter.
-
-        <br>
-
-        Your “my love.”
-
-        💜
-
-        <br>
-
-        Your stubbornness. 😂
-
-        <br>
-
-        Your random stories.
-
-        <br><br>
-
-        <span class="em">
-          You.
-        </span>
-
-        That's the part I want.
-
-      </p>
-
-      <button
-        class="open"
-        onclick="revealFinal()"
-      >
-        THERE'S ONE MORE THING...
-      </button>
+        <div class="envelope-label">
+            SARAUNIYA
+        </div>
 
     </div>
 
-  </div>
+</section>
 
 
-  <!-- FINAL -->
+<!-- LETTER -->
 
-  <div
-    class="paper"
-    id="finalPaper"
-  >
+<section
+    class="letter-screen"
+    id="letterScreen"
+>
 
-    <div class="paper-card final">
+    <article class="letter">
 
-      <div
-        class="final-text"
-        id="typing"
-      ></div>
+        <div class="letter-kicker">
+            OKAY... I LIED 😂
+        </div>
 
-      <div
-        class="love"
-        id="love"
-      ></div>
+        <h2>
+            This is actually
+            a love letter.
+        </h2>
 
-      <button
-        class="reset"
-        onclick="location.reload()"
-      >
-        PLAY AGAIN 🌚
-      </button>
+        <p>
 
-    </div>
+            I wanted to make you something today
+            that you couldn't predict.
 
-  </div>
+            <br><br>
+
+            So I didn't make you another heart.
+
+            <br>
+
+            I didn't make you a bunch of stars.
+
+            <br><br>
+
+            I just wanted to tell you something.
+
+            <span class="highlight">
+                You have become one of the
+                most beautiful surprises in my life.
+            </span>
+
+            I didn't know your voice would
+            someday be capable of making me
+            smile like an idiot.
+
+            😂💜
+
+            <br><br>
+
+            I didn't know someone could tell me
+            “go and study” and somehow make me
+            actually want to study.
+
+            <br><br>
+
+            I didn't know I'd become this happy
+            just because you sang something for me
+            and thought it wasn't good.
+
+            <span class="highlight">
+                You keep giving me little moments
+                I want to keep.
+            </span>
+
+            And honestly, Sarauniya...
+
+            <br><br>
+
+            I don't want perfect moments.
+
+            <br><br>
+
+            I want the random calls.
+
+            <br>
+
+            The silly conversations.
+
+            <br>
+
+            Your voice.
+
+            <br>
+
+            Your laughter.
+
+            <br>
+
+            Your “my love.”
+
+            💜
+
+            <br>
+
+            Your stubbornness. 😂
+
+            <br>
+
+            Your random stories.
+
+            <span class="highlight">
+                You.
+            </span>
+
+            That's the part I want.
+
+        </p>
+
+        <button
+            class="next"
+            onclick="revealFinal()"
+        >
+            THERE'S ONE MORE THING...
+        </button>
+
+
+        <!-- FINAL MESSAGE -->
+
+        <div
+            class="final"
+            id="final"
+        >
+
+            <div
+                class="final-message"
+                id="typing"
+            ></div>
+
+            <div
+                class="final-love"
+                id="finalLove"
+            ></div>
+
+            <button
+                class="replay"
+                onclick="location.reload()"
+            >
+                PLAY AGAIN 🌚
+            </button>
+
+        </div>
+
+    </article>
+
+</section>
 
 </div>
 
@@ -746,43 +773,44 @@ body{
 <script>
 
 const start =
-  document.getElementById("start");
+    document.getElementById("start");
 
 const envelopeStage =
-  document.getElementById("envelopeStage");
+    document.getElementById("envelopeStage");
 
 const envelope =
-  document.getElementById("envelope");
+    document.getElementById("envelope");
 
-const paper =
-  document.getElementById("paper");
-
-const finalPaper =
-  document.getElementById("finalPaper");
+const letterScreen =
+    document.getElementById("letterScreen");
 
 const glow =
-  document.getElementById("glow");
+    document.getElementById("glow");
+
+const final =
+    document.getElementById("final");
 
 const typing =
-  document.getElementById("typing");
+    document.getElementById("typing");
 
-const love =
-  document.getElementById("love");
+const finalLove =
+    document.getElementById("finalLove");
 
 
 /* SHOW ENVELOPE */
 
 function showEnvelope(){
 
-  start.classList.add("hide");
+    start.classList.add("hide");
 
-  glow.style.transform="scale(1.4)";
+    glow.style.transform =
+        "translate(-50%,-50%) scale(1.4)";
 
-  setTimeout(()=>{
+    setTimeout(()=>{
 
-    envelopeStage.classList.add("show");
+        envelopeStage.classList.add("show");
 
-  },700);
+    },700);
 
 }
 
@@ -791,123 +819,127 @@ function showEnvelope(){
 
 function openEnvelope(){
 
-  if(envelope.classList.contains("opened"))
-    return;
+    if(envelope.classList.contains("open"))
+        return;
 
-  envelope.classList.add("opened");
+    envelope.classList.add("open");
 
-  createParticles();
+    particles();
 
-  glow.style.transform="scale(1.8)";
+    glow.style.transform =
+        "translate(-50%,-50%) scale(1.8)";
 
-  setTimeout(()=>{
+    setTimeout(()=>{
 
-    envelopeStage.classList.remove("show");
+        envelopeStage.classList.remove("show");
 
-    paper.classList.add("show");
+        letterScreen.classList.add("show");
 
-  },900);
+        /*
+          Always start at the top
+          of the letter.
+        */
+
+        letterScreen.scrollTop=0;
+
+    },900);
 
 }
 
 
-/* FINAL MESSAGE */
+/* FINAL */
 
 function revealFinal(){
 
-  paper.classList.remove("show");
+    final.classList.add("show");
 
-  setTimeout(()=>{
+    setTimeout(()=>{
 
-    finalPaper.classList.add("show");
+        final.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
 
-    finalPaper
-      .querySelector(".final")
-      .classList.add("show");
+    },100);
 
-    typeMessage();
-
-  },600);
+    typeText();
 
 }
 
 
-/* TYPING */
+/* TYPE FINAL */
 
-function typeMessage(){
+function typeText(){
 
-  const text =
-    "If loving you means collecting thousands of little moments like these...";
+    const text =
+        "If loving you means collecting thousands of little moments like these...";
 
-  let i=0;
+    let i=0;
 
-  typing.innerHTML =
-    '<span></span><span class="cursor"></span>';
+    typing.innerHTML =
+        '<span id="typed"></span><span class="typing-cursor"></span>';
 
-  const target =
-    typing.querySelector("span");
+    const typed =
+        document.getElementById("typed");
 
-  const timer=setInterval(()=>{
+    const timer=setInterval(()=>{
 
-    target.textContent += text[i];
+        typed.textContent += text[i];
 
-    i++;
+        i++;
 
-    if(i>=text.length){
+        if(i>=text.length){
 
-      clearInterval(timer);
+            clearInterval(timer);
 
-      setTimeout(()=>{
+            setTimeout(()=>{
 
-        love.innerHTML=
-          "then I hope Allah gives me a lifetime to collect them. 💜<br><br>My Sarauniya 👑🌚";
+                finalLove.innerHTML =
+                    "Then I hope Allah gives me a lifetime to collect them. 💜<br><br>My Sarauniya 👑🌚";
 
-      },700);
+            },700);
 
-    }
+        }
 
-  },48);
+    },45);
 
 }
 
 
 /* PARTICLES */
 
-function createParticles(){
+function particles(){
 
-  for(let i=0;i<18;i++){
+    for(let i=0;i<20;i++){
 
-    setTimeout(()=>{
+        setTimeout(()=>{
 
-      const p =
-        document.createElement("div");
+            const p =
+                document.createElement("div");
 
-      p.className="particle";
+            p.className="particle";
 
-      p.style.left =
-        (25+Math.random()*50)+"%";
+            p.style.left =
+                (25+Math.random()*50)+"%";
 
-      p.style.top =
-        (52+Math.random()*15)+"%";
+            p.style.top =
+                (55+Math.random()*15)+"%";
 
-      p.style.animationDelay =
-        (Math.random()*.5)+"s";
+            document
+                .querySelector(".app")
+                .appendChild(p);
 
-      document
-        .querySelector(".app")
-        .appendChild(p);
+            setTimeout(()=>{
+                p.remove();
+            },4200);
 
-      setTimeout(()=>{
-        p.remove();
-      },4200);
+        },i*70);
 
-    },i*80);
-
-  }
+    }
 
 }
 
 </script>
 
 </body>
-  </html>
+</html>
