@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Sarauniya 💜</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+body{
+  background:#050308;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+
+/* MAIN */
+
+.app{
+  position:relative;
+  width:100%;
+  height:100dvh;
+  overflow:hidden;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #26112e 0%,
+      #100812 43%,
+      #040306 100%
+    );
+}
+
+/* subtle glow */
+
+.glow{
+  position:absolute;
+
+  width:280px;
+  height:280px;
+
+  border-radius:50%;
+
+  background:rgba(174,78,208,.10);
+
+  filter:blur(70px);
+
+  transition:transform 2s ease;
+}
+
+/* START */
+
+.start{
+  position:relative;
+  z-index:5;
+
+  width:min(88%,390px);
+
+  text-align:center;
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+.start.hide{
+  opacity:0;
+  transform:scale(.94);
+  pointer-events:none;
+}
+
+.kicker{
+  color:#866b8d;
+
+  font-size:9px;
+
+  letter-spacing:4px;
+
+  margin-bottom:20px;
+}
+
+.start h1{
+  font-family:Georgia,serif;
+
+  font-weight:normal;
+
+  font-size:clamp(32px,9vw,46px);
+
+  line-height:1.15;
+
+  margin-bottom:16px;
+}
+
+.start p{
+  color:#a99daa;
+
+  font-family:Georgia,serif;
+
+  font-size:14px;
+
+  line-height:1.8;
+}
+
+.open{
+  margin-top:30px;
+
+  border:1px solid rgba(220,170,235,.25);
+
+  background:rgba(148,61,182,.10);
+
+  color:#ddb6e7;
+
+  border-radius:50px;
+
+  padding:15px 28px;
+
+  font-size:10px;
+
+  letter-spacing:3px;
+
+  cursor:pointer;
+}
+
+.open:active{
+  transform:scale(.95);
+}
+
+/* ENVELOPE */
+
+.envelope-stage{
+  position:absolute;
+
+  z-index:10;
+
+  width:220px;
+  height:155px;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.8);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+.envelope-stage.show{
+  opacity:1;
+
+  transform:
+    translate(-50%,-50%)
+    scale(1);
+
+  pointer-events:auto;
+}
+
+.envelope{
+  position:absolute;
+
+  inset:0;
+
+  background:#2b1632;
+
+  border:1px solid rgba(228,186,239,.20);
+
+  border-radius:4px;
+
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.55),
+    0 0 40px rgba(184,91,214,.13);
+
+  overflow:hidden;
+
+  cursor:pointer;
+}
+
+.envelope::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+
+  width:0;
+  height:0;
+
+  border-left:110px solid transparent;
+  border-right:110px solid transparent;
+  border-top:82px solid #3a2042;
+
+  transform-origin:top;
+
+  transition:transform 1s ease;
+
+  z-index:3;
+}
+
+.envelope.opened::before{
+  transform:rotateX(180deg);
+
+  z-index:1;
+}
+
+.envelope::after{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  bottom:0;
+
+  width:0;
+  height:0;
+
+  border-left:110px solid #24132b;
+  border-right:110px solid #24132b;
+  border-top:75px solid transparent;
+
+  z-index:2;
+}
+
+.seal{
+  position:absolute;
+
+  z-index:5;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  width:50px;
+  height:50px;
+
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#9c52b5;
+
+  box-shadow:
+    0 0 25px rgba(195,111,220,.35);
+
+  font-size:21px;
+
+  transition:
+    opacity .5s ease,
+    transform .7s ease;
+}
+
+.envelope.opened .seal{
+  opacity:0;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.5);
+}
+
+.env-label{
+  position:absolute;
+
+  z-index:4;
+
+  left:0;
+  right:0;
+  bottom:15px;
+
+  text-align:center;
+
+  color:#d9b8df;
+
+  font-family:Georgia,serif;
+
+  font-size:11px;
+
+  letter-spacing:2px;
+}
+
+/* PAPER */
+
+.paper{
+  position:absolute;
+
+  z-index:20;
+
+  left:50%;
+  top:50%;
+
+  width:min(90%,420px);
+
+  max-height:80dvh;
+
+  overflow:hidden;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.75);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:
+    opacity 1s ease,
+    transform 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.paper.show{
+  opacity:1;
+
+  transform:
+    translate(-50%,-50%)
+    scale(1);
+
+  pointer-events:auto;
+}
+
+.paper-card{
+  width:100%;
+
+  padding:
+    clamp(25px,7vw,38px)
+    clamp(22px,7vw,38px);
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(40,22,47,.96),
+      rgba(15,9,19,.98)
+    );
+
+  border:
+    1px solid rgba(226,181,238,.13);
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.55);
+}
+
+.paper-kicker{
+  color:#876c8d;
+
+  font-size:8px;
+
+  letter-spacing:3px;
+
+  margin-bottom:18px;
+}
+
+.paper-card h2{
+  font-family:Georgia,serif;
+
+  font-weight:normal;
+
+  font-size:
+    clamp(27px,8vw,39px);
+
+  line-height:1.2;
+
+  margin-bottom:22px;
+}
+
+.paper-card p{
+  color:#b9aabb;
+
+  font-family:Georgia,serif;
+
+  font-size:
+    clamp(13px,3.7vw,16px);
+
+  line-height:1.85;
+}
+
+.em{
+  display:block;
+
+  margin:
+    17px 0;
+
+  color:#dfa9ec;
+
+  font-size:
+    clamp(16px,4.5vw,20px);
+}
+
+/* typing final */
+
+.final{
+  display:none;
+
+  text-align:center;
+}
+
+.final.show{
+  display:block;
+
+  animation:
+    finalIn 1s ease forwards;
+}
+
+@keyframes finalIn{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.final-text{
+  font-family:Georgia,serif;
+
+  font-size:
+    clamp(23px,7vw,34px);
+
+  line-height:1.45;
+
+  color:#eee2f0;
+}
+
+.cursor{
+  display:inline-block;
+
+  width:2px;
+  height:1em;
+
+  margin-left:4px;
+
+  vertical-align:-2px;
+
+  background:#dca5eb;
+
+  animation:blink .7s infinite;
+}
+
+@keyframes blink{
+  50%{opacity:0}
+}
+
+.love{
+  margin-top:20px;
+
+  color:#dda5eb;
+
+  font-size:18px;
+
+  font-family:Georgia,serif;
+}
+
+.reset{
+  margin-top:25px;
+
+  background:none;
+
+  border:none;
+
+  color:#67576a;
+
+  font-size:9px;
+
+  letter-spacing:2px;
+
+  cursor:pointer;
+}
+
+/* small floating particles */
+
+.particle{
+  position:absolute;
+
+  width:3px;
+  height:3px;
+
+  border-radius:50%;
+
+  background:#dca8ec;
+
+  opacity:0;
+
+  animation:
+    rise 4s ease-out forwards;
+}
+
+@keyframes rise{
+  0%{
+    opacity:0;
+    transform:translateY(20px);
+  }
+
+  20%{
+    opacity:.6;
+  }
+
+  100%{
+    opacity:0;
+    transform:translateY(-180px);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="glow" id="glow"></div>
+
+  <!-- START -->
+
+  <div class="start" id="start">
+
+    <div class="kicker">
+      FOR MY SARAUNIYA 👑
+    </div>
+
+    <h1>
+      I hid something<br>
+      for you.
+    </h1>
+
+    <p>
+      Don't try to guess what it is. 🌚
+      <br>
+      Just open it.
+    </p>
+
+    <button
+      class="open"
+      onclick="showEnvelope()"
+    >
+      OPEN IT 💜
+    </button>
+
+  </div>
+
+
+  <!-- ENVELOPE -->
+
+  <div
+    class="envelope-stage"
+    id="envelopeStage"
+  >
+
+    <div
+      class="envelope"
+      id="envelope"
+      onclick="openEnvelope()"
+    >
+
+      <div class="seal">
+        💜
+      </div>
+
+      <div class="env-label">
+        SARAUNIYA
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PAPER -->
+
+  <div
+    class="paper"
+    id="paper"
+  >
+
+    <div class="paper-card">
+
+      <div class="paper-kicker">
+        OKAY... I LIED 😂
+      </div>
+
+      <h2>
+        This is actually
+        a love letter.
+      </h2>
+
+      <p>
+
+        I wanted to make you something today
+        that you couldn't predict.
+
+        <br><br>
+
+        So I didn't make you another heart.
+
+        <br>
+
+        I didn't make you a bunch of stars.
+
+        <br>
+
+        I just wanted to tell you something.
+
+        <span class="em">
+          You have become one of the
+          most beautiful surprises in my life.
+        </span>
+
+        I didn't know your voice would
+        someday be capable of making me
+        smile like an idiot.
+
+        😂💜
+
+        <br><br>
+
+        I didn't know someone could tell me
+        “go and study” and somehow make me
+        actually want to study.
+
+        <br><br>
+
+        I didn't know I'd become this happy
+        just because you sang something for me
+        and thought it wasn't good.
+
+        <span class="em">
+          You keep giving me little moments
+          I want to keep.
+        </span>
+
+        And honestly, Sarauniya...
+
+        <br><br>
+
+        I don't want perfect moments.
+
+        <br>
+
+        I want the random calls.
+
+        <br>
+
+        The silly conversations.
+
+        <br>
+
+        Your voice.
+
+        <br>
+
+        Your laughter.
+
+        <br>
+
+        Your “my love.”
+
+        💜
+
+        <br>
+
+        Your stubbornness. 😂
+
+        <br>
+
+        Your random stories.
+
+        <br><br>
+
+        <span class="em">
+          You.
+        </span>
+
+        That's the part I want.
+
+      </p>
+
+      <button
+        class="open"
+        onclick="revealFinal()"
+      >
+        THERE'S ONE MORE THING...
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- FINAL -->
+
+  <div
+    class="paper"
+    id="finalPaper"
+  >
+
+    <div class="paper-card final">
+
+      <div
+        class="final-text"
+        id="typing"
+      ></div>
+
+      <div
+        class="love"
+        id="love"
+      ></div>
+
+      <button
+        class="reset"
+        onclick="location.reload()"
+      >
+        PLAY AGAIN 🌚
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const start =
+  document.getElementById("start");
+
+const envelopeStage =
+  document.getElementById("envelopeStage");
+
+const envelope =
+  document.getElementById("envelope");
+
+const paper =
+  document.getElementById("paper");
+
+const finalPaper =
+  document.getElementById("finalPaper");
+
+const glow =
+  document.getElementById("glow");
+
+const typing =
+  document.getElementById("typing");
+
+const love =
+  document.getElementById("love");
+
+
+/* SHOW ENVELOPE */
+
+function showEnvelope(){
+
+  start.classList.add("hide");
+
+  glow.style.transform="scale(1.4)";
+
+  setTimeout(()=>{
+
+    envelopeStage.classList.add("show");
+
+  },700);
+
+}
+
+
+/* OPEN ENVELOPE */
+
+function openEnvelope(){
+
+  if(envelope.classList.contains("opened"))
+    return;
+
+  envelope.classList.add("opened");
+
+  createParticles();
+
+  glow.style.transform="scale(1.8)";
+
+  setTimeout(()=>{
+
+    envelopeStage.classList.remove("show");
+
+    paper.classList.add("show");
+
+  },900);
+
+}
+
+
+/* FINAL MESSAGE */
+
+function revealFinal(){
+
+  paper.classList.remove("show");
+
+  setTimeout(()=>{
+
+    finalPaper.classList.add("show");
+
+    finalPaper
+      .querySelector(".final")
+      .classList.add("show");
+
+    typeMessage();
+
+  },600);
+
+}
+
+
+/* TYPING */
+
+function typeMessage(){
+
+  const text =
+    "If loving you means collecting thousands of little moments like these...";
+
+  let i=0;
+
+  typing.innerHTML =
+    '<span></span><span class="cursor"></span>';
+
+  const target =
+    typing.querySelector("span");
+
+  const timer=setInterval(()=>{
+
+    target.textContent += text[i];
+
+    i++;
+
+    if(i>=text.length){
+
+      clearInterval(timer);
+
+      setTimeout(()=>{
+
+        love.innerHTML=
+          "then I hope Allah gives me a lifetime to collect them. 💜<br><br>My Sarauniya 👑🌚";
+
+      },700);
+
+    }
+
+  },48);
+
+}
+
+
+/* PARTICLES */
+
+function createParticles(){
+
+  for(let i=0;i<18;i++){
+
+    setTimeout(()=>{
+
+      const p =
+        document.createElement("div");
+
+      p.className="particle";
+
+      p.style.left =
+        (25+Math.random()*50)+"%";
+
+      p.style.top =
+        (52+Math.random()*15)+"%";
+
+      p.style.animationDelay =
+        (Math.random()*.5)+"s";
+
+      document
+        .querySelector(".app")
+        .appendChild(p);
+
+      setTimeout(()=>{
+        p.remove();
+      },4200);
+
+    },i*80);
+
+  }
+
+}
+
+</script>
+
+</body>
+  </html>
